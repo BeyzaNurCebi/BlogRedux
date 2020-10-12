@@ -9,7 +9,11 @@ import ShowScreen from "./src/screens/ShowScreen";
 import EditScreen from "./src/screens/EditScreen";
 
 import { Provider } from "react-redux";
-import { store } from "./src/store/store";
+//  import { store } from "./src/store/store";
+
+import generateStore from "./src/store/store";
+
+const store = generateStore()
 
 const Stack = createStackNavigator();
 

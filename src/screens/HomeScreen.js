@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { deleteBlogPost } from "../store/actions";
 import { bindActionCreators } from "redux";
 
-const HomeScreen = ({ navigation, list }) => {
+const HomeScreen = ({ navigation, list, deletePost }) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation, list }) => {
             >
               <Text style={styles.text}>{item.title}</Text>
 
-              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+              <TouchableOpacity onPress={() => deletePost(item.id)}>
                 <Feather name="trash-2" size={24} color="black" />
               </TouchableOpacity>
             </TouchableOpacity>
@@ -54,17 +54,26 @@ const HomeScreen = ({ navigation, list }) => {
 
 const mapStateToProps = (state) => {
   return {
-    list: state.reducer.blog_list,
+    list: state.blog_list,
   };
 };
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      deleteBlogPost,
-    },
-    dispatch
-  );
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePost: (id) => {
+      console.log('deleting', id)
+      dispatch(deleteBlogPost(id))
+    }
+  }
+}
+
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(
+//     {
+//       deleteBlogPost,
+//     },
+//     dispatch
+//   );
 
 const styles = StyleSheet.create({
   text: {

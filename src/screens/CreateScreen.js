@@ -5,7 +5,7 @@ import { addBlogPost } from "../store/actions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-const CreateScreen = ({ navigation }) => {
+const CreateScreen = ({navigation,addPost}) => {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
 
@@ -26,7 +26,7 @@ const CreateScreen = ({ navigation }) => {
       <Button
         title="Save"
         onPress={() => {
-          addBlogPost(title, content);
+          addPost(title, content);
 
           navigation.navigate("Home");
         }}
@@ -36,19 +36,24 @@ const CreateScreen = ({ navigation }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    list: state.reducer.blog_list,
+    list: state.blog_list,
   };
 };
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      addBlogPost,
-    },
-    dispatch
-  );
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: (title,content) => {dispatch(addBlogPost(title,content))}
+  }
+}
+
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(
+//     {
+//       addBlogPost,
+//     },
+//     dispatch
+//   );
 
 const styles = StyleSheet.create({
   container: {

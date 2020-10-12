@@ -28,16 +28,29 @@ function randomidGenerator() {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case add_blogpost:
-      return [
-        ...state,
-        {
-          id: randomidGenerator(),
-          title: action.payload.title,
-          content: action.payload.content,
-        },
-      ];
+
+      console.log('current state', state)
+      const blog_list = [...state.blog_list, {
+        id: randomidGenerator(),
+        title: action.payload.title,
+        content: action.payload.content,
+      }]
+      
+      return {
+        blog_list
+      };
+    
     case delete_blogpost:
-      return state.filter((item) => item.id !== action.payload);
+
+      const newList = state.blog_list.filter((item) => {
+
+        console.log('removing', item.id, action)
+        return item.id !== action.payload.id
+      })
+      console.log('deleted list', newList, action.payload)
+      return {
+        blog_list: newList
+      }
     default:
       return state;
   }

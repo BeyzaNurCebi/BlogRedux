@@ -35,7 +35,7 @@ const ShowScreen = ({ route, navigation, list }) => {
 
 const mapStateToProps = (state) => {
   return {
-    list: state.reducer.blog_list,
+    list: state.blog_list,
   };
 };
 

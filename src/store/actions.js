@@ -15,6 +15,9 @@ import {
 // };
 
 export const addBlogPost = (title, content) => {
+
+  console.log('add blog post', title,content)
+
   return {
     type: add_blogpost,
     payload: { title: title, content: content },
@@ -24,6 +27,6 @@ export const addBlogPost = (title, content) => {
 export const deleteBlogPost = (id) => {
   return {
     type: delete_blogpost,
-    payload: id,
+    payload: {id},
   };
 };
